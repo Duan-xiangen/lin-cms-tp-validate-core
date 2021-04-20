@@ -36,7 +36,7 @@ class Param
     protected $reflex;
 
     // 设置默认路径
-    protected $default_path = 'api/validate';
+    protected $default_path;
     // @param 模式
     protected $param = ['name'=>'param','rule'=>['name','doc','rule']];
     // @validate 模式
@@ -54,6 +54,7 @@ class Param
     public function handle(\think\Request $request, \Closure $next)
     {
         $this->request = $request;
+        $this->default_path = $this->request->module().'/validate';
         $this->setReflex();
         $this->setReflexParamRule();
         if (!empty($this->rule)){
